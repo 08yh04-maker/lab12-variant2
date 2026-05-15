@@ -47,3 +47,33 @@ docker-compose up --build
 6. Сравнение разных ИИ-моделей
 7. Генерация unit-тестов с покрытием 90%
 8. Исправление галлюцинаций ИИ
+
+## Выполненные задания (повышенная сложность)
+
+| № | Задание | Статус | Описание |
+|---|---------|--------|----------|
+| 1 | Полноценное веб-приложение | ✅ | FastAPI + SQLAlchemy + JWT + админ-панель + отчёты |
+| 2 | Code review сгенерированного кода | ✅ | Найдено и исправлено 5+ ошибок |
+| 3 | Настройка локальной LLM | ✅ | Ollama + Qwen Coder + Continue.dev |
+| 4 | Интеграция ИИ в CI/CD | ✅ | GitHub Actions с автоматическим ревью PR |
+| 5 | Плагин для VS Code | ✅ | AI Code Explainer (Ctrl+Shift+E) |
+| 6 | Сравнение разных ИИ-моделей | ✅ | DeepSeek vs Claude vs Qwen |
+| 7 | Генерация unit-тестов с покрытием 90% | ✅ | Покрытие 93%, pytest |
+| 8 | Исправление галлюцинаций ИИ | ✅ | Эссе-рассуждение + примеры |
+
+## Структура репозитория
+lab12-variant2/
+├── .github/workflows/ # CI/CD (задание 4)
+├── app/ # Основное приложение (задание 1)
+├── vscode-plugin/ # Плагин для VS Code (задание 5)
+├── tests/ # Тесты (задание 7)
+├── TASK4_CI_CD.md # Документация CI/CD
+├── TASK5_VSCODE_PLUGIN.md # Документация плагина
+├── TASK6_COMPARISON.md # Сравнение моделей
+├── TASK7_TESTS.md # Документация тестов
+├── TASK8_HALLUCINATIONS.md # Эссе о галлюцинациях
+├── README.md
+├── PROMPT_LOG.md
+└── .gitignore
+## Ссылка на репозиторий
+[https://github.com/08yh04-maker/lab12-variant2](https://github.com/08yh04-maker/lab12-variant2)
