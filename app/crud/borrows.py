@@ -57,7 +57,7 @@ def return_book(db: Session, borrow_id: int) -> Optional[Borrow]:
     if book:
         book.quantity_available += 1
 
-    if db_borrow.return_date > db_borrow.due_date:
+       if db_borrow.return_date > db_borrow.due_date:
         days_overdue = (db_borrow.return_date - db_borrow.due_date).days
         if days_overdue > 0:
             fine_amount = days_overdue * 10.0
@@ -68,6 +68,7 @@ def return_book(db: Session, borrow_id: int) -> Optional[Borrow]:
                 paid=False
             )
             db.add(fine)
+            # Статус остаётся RETURNED, штраф создан отдельно
 
     db.commit()
     db.refresh(db_borrow)

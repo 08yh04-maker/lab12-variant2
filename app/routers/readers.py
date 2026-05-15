@@ -11,7 +11,6 @@ from app.auth import get_current_admin_user
 router = APIRouter(prefix="/readers", tags=["Читатели"])
 
 
-@router.post("/", response_model=ReaderResponse, status_code=status.HTTP_201_CREATED)
 def create_reader(
     reader: ReaderCreate,
     db: Session = Depends(get_db),
@@ -24,12 +23,6 @@ def create_reader(
             detail="Username already exists"
         )
 
-    existing_user = db.query(User).filter(User.email == reader.email).first()
-    if existing_user:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Email already exists"
-        )
 
     return readers_crud.create_reader(db, reader)
 
