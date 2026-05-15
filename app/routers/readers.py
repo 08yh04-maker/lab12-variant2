@@ -22,7 +22,38 @@ def create_reader(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username already exists"
         )
+from fastapi import APIRouter, Depends, HTTPException, status, Query
+from sqlalchemy.orm import Session
+from typing import Optional
 
+from app.database import get_db
+from app.models import User
+from app.schemas import ReaderCreate, ReaderUpdate, ReaderResponse, ReaderList
+from app.crud import readers as readers_crud
+from app.auth import get_current_admin_user
+
+router = APIRouter(prefix="/readers", tags=["Читатели"])
+
+
+@router.post("/", response_model=ReaderResponse, status_code=status.HTTP_201_CREATED)
+def create_reader(
+    reader: ReaderCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_admin_user)
+):
+    existing_user = db.query(User).filter(User.username == reader.username).first()
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Username already exists"
+        )
+
+    existing_user = db.query(User).filter(User.email == reader.email).first()
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email already exists"
+        )
 
     return readers_crud.create_reader(db, reader)
 
